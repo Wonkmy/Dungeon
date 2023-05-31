@@ -4,52 +4,53 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    List<GameObject> allContain = new List<GameObject>();
-    GameObject tile;
     private void Start()
     {
-        tile = Resources.Load<GameObject>("Prefabs/tile");
+        RotateAllChunkDataArray();
+        
 
         int[,] mapData = MapData.data;
         Utility.RotateArray(mapData);
-        GameObject chunkViewerContain = null;
 
-        for (int i = 0; i < 3; i++)
+        for (int x = 0; x < mapData.GetLength(0); x++)
         {
-            for (int y = 0; y < 3; y++)
+            for (int y = 0; y < mapData.GetLength(1); y++)
             {
-                chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
-                allContain.Add(chunkViewerContain);
-                chunkViewerContain.transform.position = new Vector3(i * 7, y * 7, 0);
-            }
-            
-        }
-
-        for (int i = 0; i < allContain.Count; i++)
-        {
-            //MapChunkViewer mapChunkViewer = allContain[i].GetComponent<MapChunkViewer>();
-            //int[,] chunData = mapChunkViewer.InitChunk(ChunkType.NormalChunk);
-            GeneratorSingleChunk(ChunkData.NormalChunk, allContain[i].transform);
-        }
-    }
-
-    void GeneratorSingleChunk(int[,] chunkData,Transform parent)
-    {
-        Utility.RotateArray(chunkData);
-        for (int x = 0; x < chunkData.GetLength(0); x++)
-        {
-            for (int y = 0; y < chunkData.GetLength(1); y++)
-            {
-                if (chunkData[x, y] == 1)
+                if (mapData[x, y] != 0)
                 {
-                    GameObject newTile = Instantiate(tile);
-                    newTile.GetComponent<MyTile>().Init();
-                    newTile.GetComponent<MyTile>().SetTileCoords(5, 15);
-                    newTile.transform.SetParent(parent);
-                    newTile.transform.position = new Vector3(x, y);
-                    newTile.transform.localScale = Vector3.one * 6.243f;
+                    if (mapData[x, y] == 1)
+                    {
+                        GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
+                        chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
+                        chunkViewerContain.GetComponent<MapChunkViewer>().Init();
+                        chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
+                    }
+                    //if (mapData[x, y] == 2)
+                    //{
+                    //    GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
+                    //    chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
+                    //    chunkViewerContain.GetComponent<MapChunkViewer>().Init();
+                    //    chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
+                    //}
+                    //if (mapData[x, y] == 3)
+                    //{
+                    //    GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
+                    //    chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
+                    //    chunkViewerContain.GetComponent<MapChunkViewer>().Init();
+                    //    chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
+                    //}
                 }
             }
         }
+    }
+
+    void RotateAllChunkDataArray()
+    {
+        Utility.RotateArray(ChunkData.NormalChunk);
+        Utility.RotateArray(ChunkData.LineChunk);
+        Utility.RotateArray(ChunkData.QuadChunk);
+        Utility.RotateArray(ChunkData.ZhongChunk);
+        Utility.RotateArray(ChunkData.RopeChunk);
+        Utility.RotateArray(ChunkData.BaseChunk);
     }
 }

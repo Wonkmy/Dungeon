@@ -34,6 +34,8 @@ public class Utility
 
     public static int[,] GetChunkDataByChunkType(ChunkType type)
     {
+        if (type == ChunkType.BaseChunk)
+        { return ChunkData.BaseChunk; }
         if (type == ChunkType.NormalChunk)
         { return ChunkData.NormalChunk; }
         else if (type == ChunkType.LineChunk)
