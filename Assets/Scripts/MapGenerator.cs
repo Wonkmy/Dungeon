@@ -25,20 +25,20 @@ public class MapGenerator : MonoBehaviour
                         chunkViewerContain.GetComponent<MapChunkViewer>().Init();
                         chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
                     }
-                    //if (mapData[x, y] == 2)
-                    //{
-                    //    GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
-                    //    chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
-                    //    chunkViewerContain.GetComponent<MapChunkViewer>().Init();
-                    //    chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
-                    //}
-                    //if (mapData[x, y] == 3)
-                    //{
-                    //    GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
-                    //    chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
-                    //    chunkViewerContain.GetComponent<MapChunkViewer>().Init();
-                    //    chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
-                    //}
+                    if (mapData[x, y] == 2)
+                    {
+                        GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
+                        chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
+                        chunkViewerContain.GetComponent<MapChunkViewer>().Init();
+                        chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
+                    }
+                    if (mapData[x, y] == 3)
+                    {
+                        GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
+                        chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
+                        chunkViewerContain.GetComponent<MapChunkViewer>().Init();
+                        chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
+                    }
                 }
             }
         }
