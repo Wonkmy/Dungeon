@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\GlobalDefine.cs" />
     <Compile Include="Assets\Scripts\MyTile.cs" />
     <Compile Include="Assets\Scripts\MapChunkViewer.cs" />
+    <Compile Include="Assets\Scripts\CameraFollow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
