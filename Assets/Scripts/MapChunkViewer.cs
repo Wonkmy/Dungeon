@@ -7,6 +7,8 @@ public class MapChunkViewer : MonoBehaviour
     GameObject tile;
     public int CID { get; set; }
     public ChunkType type { get; set; }
+
+    int[,] chunkData;
     public void Init(int cid)
     {
         CID = cid;
@@ -15,7 +17,7 @@ public class MapChunkViewer : MonoBehaviour
     public void InitChunk(ChunkType _type)
     {
         type = _type;
-        int[,] chunkData = Utility.GetChunkDataByChunkType(type);
+        chunkData = Utility.GetChunkDataByChunkType(type);
         GameObject newTile = null;
         for (int x = 0; x < chunkData.GetLength(0); x++)
         {
@@ -33,7 +35,7 @@ public class MapChunkViewer : MonoBehaviour
                 }
             }
         }
-        if (Random.Range(0, 100) > 30)
+        if (Random.Range(0, 100) > 70)
         {
             SpwanItems(newTile);
         }
@@ -46,7 +48,7 @@ public class MapChunkViewer : MonoBehaviour
         {
             for (int j = 0; j < itemData.GetLength(1); j++)
             {
-                if (itemData[i, j] != 0)
+                if (itemData[i, j] != 0 && chunkData[i,j]!=0)
                 {
                     if (itemData[i, j] == 1) //0为空 1为金币  2为棕罐子 3为蓝罐子  4为棕宝箱  5为黄宝箱
                     {
@@ -89,6 +91,6 @@ public class MapChunkViewer : MonoBehaviour
         newTile.transform.SetParent(transform);
         newTile.transform.localPosition = new Vector3(x - ChunkData.ChunkSize / 2.0f + 0.5f, y - ChunkData.ChunkSize / 2.0f + 0.5f);
         newTile.transform.localScale = Vector3.one * 6.243f;
-        newTile.transform.SetSiblingIndex(baseTile.transform.GetSiblingIndex() + 1);
+        newTile.GetComponent<SpriteRenderer>().sortingOrder = baseTile.GetComponent<SpriteRenderer>().sortingOrder + 1;
     }
 }

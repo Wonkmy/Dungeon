@@ -4,17 +4,40 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     Dictionary<int, MapChunkViewer> mapChunkViewers;
+    public static MapGenerator instance;
+    GameObject newPlayer;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         mapChunkViewers = new Dictionary<int, MapChunkViewer>();
         RotateAllChunkDataArray();
+        newPlayer = Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
         GeneratorMap();
     }
 
     void GeneratorMap()
     {
-        int[,] mapData = MapData.GenerateData(11, 11);
-        Utility.RotateArray(mapData);
+        int randMapID = Random.Range(0, 4);
+        int[,] mapData = null;
+        switch (randMapID)
+        {
+            case 0:
+                mapData = MapData.data1;
+                break;
+            case 1:
+                mapData = MapData.data2;
+                break;
+            case 2:
+                mapData = MapData.data3;
+                break;
+            case 3:
+                mapData = MapData.data4;
+                break;
+        }
+        
         int cid = 0;
         for (int x = 0; x < mapData.GetLength(0); x++)
         {
@@ -39,7 +62,7 @@ public class MapGenerator : MonoBehaviour
                         chunkViewerContain.transform.localPosition = new Vector3(x * ChunkData.ChunkSize - 38, y * ChunkData.ChunkSize, 0);
                         MapChunkViewer mapChunkViewer = chunkViewerContain.GetComponent<MapChunkViewer>();
                         mapChunkViewer.Init(cid++);
-                        mapChunkViewer.InitChunk(ChunkType.BaseChunk);
+                        mapChunkViewer.InitChunk(ChunkType.NormalChunk);
                         mapChunkViewers.Add(mapChunkViewer.CID, mapChunkViewer);
                     }
                     if (mapData[x, y] == 6)
@@ -49,13 +72,24 @@ public class MapGenerator : MonoBehaviour
                         chunkViewerContain.transform.localPosition = new Vector3(x * ChunkData.ChunkSize - 38, y * ChunkData.ChunkSize, 0);
                         MapChunkViewer mapChunkViewer = chunkViewerContain.GetComponent<MapChunkViewer>();
                         mapChunkViewer.Init(cid++);
+                        mapChunkViewer.InitChunk(ChunkType.RopeChunk);
+                        mapChunkViewers.Add(mapChunkViewer.CID, mapChunkViewer);
+                    }
+                    if (mapData[x, y] == 999)
+                    {
+                        GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
+                        chunkViewerContain.transform.SetParent(transform);
+                        chunkViewerContain.transform.localPosition = new Vector3(x * ChunkData.ChunkSize - 38, y * ChunkData.ChunkSize, 0);
+                        MapChunkViewer mapChunkViewer = chunkViewerContain.GetComponent<MapChunkViewer>();
+                        mapChunkViewer.Init(cid++);
                         mapChunkViewer.InitChunk(ChunkType.BaseChunk);
                         mapChunkViewers.Add(mapChunkViewer.CID, mapChunkViewer);
+                        newPlayer.transform.position = chunkViewerContain.transform.position;
+                        Camera.main.GetComponent<CameraFollow>().SetFollow(newPlayer.transform, true);
                     }
                 }
             }
         }
-        Camera.main.GetComponent<CameraFollow>().SetFollow(GetChunkViewByCID(0).transform,true);
     }
 
 
@@ -91,6 +125,10 @@ public class MapGenerator : MonoBehaviour
 
     void RotateAllChunkDataArray()
     {
+        Utility.RotateArray(MapData.data1);
+        Utility.RotateArray(MapData.data2);
+        Utility.RotateArray(MapData.data3);
+        Utility.RotateArray(MapData.data4);
         Utility.RotateArray(ChunkData.NormalChunk);
         Utility.RotateArray(ChunkData.LineChunk);
         Utility.RotateArray(ChunkData.QuadChunk);
