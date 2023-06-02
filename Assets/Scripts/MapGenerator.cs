@@ -13,7 +13,7 @@ public class MapGenerator : MonoBehaviour
 
     void GeneratorMap()
     {
-        int[,] mapData = MapData.data;
+        int[,] mapData = MapData.GenerateData(11, 11);
         Utility.RotateArray(mapData);
         int cid = 0;
         for (int x = 0; x < mapData.GetLength(0); x++)
@@ -39,16 +39,19 @@ public class MapGenerator : MonoBehaviour
                         chunkViewerContain.transform.localPosition = new Vector3(x * ChunkData.ChunkSize - 38, y * ChunkData.ChunkSize, 0);
                         MapChunkViewer mapChunkViewer = chunkViewerContain.GetComponent<MapChunkViewer>();
                         mapChunkViewer.Init(cid++);
-                        mapChunkViewer.InitChunk(ChunkType.NormalChunk);
+                        mapChunkViewer.InitChunk(ChunkType.BaseChunk);
                         mapChunkViewers.Add(mapChunkViewer.CID, mapChunkViewer);
                     }
-                    //if (mapData[x, y] == 3)
-                    //{
-                    //    GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
-                    //    chunkViewerContain.transform.position = new Vector3(x * 7 - 38, y * 7, 0);
-                    //    chunkViewerContain.GetComponent<MapChunkViewer>().Init();
-                    //    chunkViewerContain.GetComponent<MapChunkViewer>().InitChunk(ChunkType.BaseChunk);
-                    //}
+                    if (mapData[x, y] == 6)
+                    {
+                        GameObject chunkViewerContain = new GameObject("chunkViewer", typeof(MapChunkViewer));
+                        chunkViewerContain.transform.SetParent(transform);
+                        chunkViewerContain.transform.localPosition = new Vector3(x * ChunkData.ChunkSize - 38, y * ChunkData.ChunkSize, 0);
+                        MapChunkViewer mapChunkViewer = chunkViewerContain.GetComponent<MapChunkViewer>();
+                        mapChunkViewer.Init(cid++);
+                        mapChunkViewer.InitChunk(ChunkType.BaseChunk);
+                        mapChunkViewers.Add(mapChunkViewer.CID, mapChunkViewer);
+                    }
                 }
             }
         }
@@ -94,5 +97,9 @@ public class MapGenerator : MonoBehaviour
         Utility.RotateArray(ChunkData.ZhongChunk);
         Utility.RotateArray(ChunkData.RopeChunk);
         Utility.RotateArray(ChunkData.BaseChunk);
+        Utility.RotateArray(ItemData.Recipe1);
+        Utility.RotateArray(ItemData.Recipe2);
+        Utility.RotateArray(ItemData.Recipe3);
+        Utility.RotateArray(ItemData.Recipe4);
     }
 }

@@ -49,4 +49,29 @@ public class Utility
         else
         { return new int[0, 0]; }
     }
+
+    public static int[,] GetRandomItemRecipeData()
+    {
+        int rand = Random.Range(0, 4);
+        if (rand == 0)
+        {
+            return ItemData.Recipe1;
+        }
+        else if (rand == 1)
+        {
+            return ItemData.Recipe2;
+        }
+        else if (rand == 2)
+        {
+            return ItemData.Recipe3;
+        }
+        else if (rand == 3)
+        {
+            return ItemData.Recipe4;
+        }
+        else
+        {
+            return new int[0, 0];
+        }
+    }
 }
