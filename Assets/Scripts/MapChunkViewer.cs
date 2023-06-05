@@ -36,6 +36,7 @@ public class MapChunkViewer : MonoBehaviour
                     newTile.transform.localPosition = new Vector3(x - ChunkData.ChunkSize / 2.0f + 0.5f, y - ChunkData.ChunkSize / 2.0f + 0.5f);
                     newTile.transform.localScale = Vector3.one * 6.243f;
                     allBaseTile[x, y] = newTile.GetComponent<MyTile>();
+                    newTile.AddComponent<BoxCollider2D>();
                 }
             }
         }
