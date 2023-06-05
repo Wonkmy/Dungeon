@@ -6,10 +6,10 @@ public class Utility
 {
     public static void RotateArray(int[,] array)
     {
-        Debug.Log(1);
+        //Debug.Log(1);
         int rows = array.GetLength(0);
         int cols = array.GetLength(1);
-        // ×ªÖÃ¾ØÕó
+        // ×ªï¿½Ã¾ï¿½ï¿½ï¿½
         for (int i = 0; i < rows; i++)
         {
             for (int j = i + 1; j < cols; j++)
@@ -20,7 +20,7 @@ public class Utility
             }
         }
 
-        // ÄæÐò´¦Àí
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols / 2; j++)

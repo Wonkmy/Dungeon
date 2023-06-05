@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{601AD460-7921-7182-8F78-1F3B28419D18}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MapChunkViewer.cs">
+    <Files>
+      <File FileName="Assets/Scripts/PlayerManager.cs" Line="33" Column="10" />
+      <File FileName="Assets/Scripts/GlobalDefine.cs" Line="15" Column="10" />
+      <File FileName="Assets/Scripts/MapGenerator.cs" Line="89" Column="69" />
+      <File FileName="Assets/Scripts/Utility.cs" Line="9" Column="11" />
+      <File FileName="Assets/Scripts/MapChunkViewer.cs" Line="38" Column="71" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Dungeon" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Plugins" expanded="True">
+                <Node name="Demigiant" expanded="True">
+                  <Node name="DOTween" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Scripts" expanded="True">
+                <Node name="MapChunkViewer.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="cde596c0-b66e-46cb-8bb2-f28d2fb59b3d" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

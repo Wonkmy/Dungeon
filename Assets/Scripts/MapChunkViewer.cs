@@ -9,10 +9,13 @@ public class MapChunkViewer : MonoBehaviour
     public ChunkType type { get; set; }
 
     int[,] chunkData;
+
+    MyTile[,] allBaseTile;
     public void Init(int cid)
     {
         CID = cid;
         tile = Resources.Load<GameObject>("Prefabs/tile");
+        allBaseTile = new MyTile[7, 7];
     }
     public void InitChunk(ChunkType _type)
     {
@@ -32,6 +35,7 @@ public class MapChunkViewer : MonoBehaviour
                     newTile.transform.SetParent(transform);
                     newTile.transform.localPosition = new Vector3(x - ChunkData.ChunkSize / 2.0f + 0.5f, y - ChunkData.ChunkSize / 2.0f + 0.5f);
                     newTile.transform.localScale = Vector3.one * 6.243f;
+                    allBaseTile[x, y] = newTile.GetComponent<MyTile>();
                 }
             }
         }
@@ -50,7 +54,7 @@ public class MapChunkViewer : MonoBehaviour
             {
                 if (itemData[i, j] != 0 && chunkData[i,j]!=0)
                 {
-                    if (itemData[i, j] == 1) //0Îª¿Õ 1Îª½ð±Ò  2Îª×Ø¹Þ×Ó 3ÎªÀ¶¹Þ×Ó  4Îª×Ø±¦Ïä  5Îª»Æ±¦Ïä
+                    if (itemData[i, j] == 1) //0Îªï¿½ï¿½ 1Îªï¿½ï¿½ï¿½  2Îªï¿½Ø¹ï¿½ï¿½ï¿½ 3Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  4Îªï¿½Ø±ï¿½ï¿½ï¿½  5Îªï¿½Æ±ï¿½ï¿½ï¿½
                     {
                         SpwanTile("newCoin", i, j, baseTile, 80, 32, true, true, 4);
                     }

@@ -15,6 +15,8 @@ public class MapGenerator : MonoBehaviour
         mapChunkViewers = new Dictionary<int, MapChunkViewer>();
         RotateAllChunkDataArray();
         newPlayer = Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
+        newPlayer.GetComponent<PlayerManager>().moveSpeed = 0.2f;
+        newPlayer.GetComponent<PlayerManager>().moveDirection = PlayerMoveDirection.UP;
         GeneratorMap();
     }
 
@@ -84,7 +86,7 @@ public class MapGenerator : MonoBehaviour
                         mapChunkViewer.Init(cid++);
                         mapChunkViewer.InitChunk(ChunkType.BaseChunk);
                         mapChunkViewers.Add(mapChunkViewer.CID, mapChunkViewer);
-                        newPlayer.transform.position = chunkViewerContain.transform.position;
+                        newPlayer.transform.position = Vector3.zero;
                         Camera.main.GetComponent<CameraFollow>().SetFollow(newPlayer.transform, true);
                     }
                 }
